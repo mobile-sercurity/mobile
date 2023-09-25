@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+           android:id="@+id/group1">
+        <item
+            android:id="@+id/nav_sneakers"
+            android:icon="@drawable/ic_sneaker"
+            android:title="@string/sneakers" />
+        <item
+            android:id="@+id/nav_oxfords"
+            android:icon="@drawable/ic_oxford"
+            android:title="@string/oxfords" />
+
+        <item
+            android:id="@+id/nav_loafers"
+            android:icon="@drawable/ic_loafer"
+            android:title="@string/loafers" />
+
+        <item
+            android:id="@+id/nav_boots"
+            android:icon="@drawable/ic_boot"
+            android:title="@string/boots" />
+    </group>
+
+    <group android:checkableBehavior="single"
+           android:id="@+id/group2">
+            <item
+                android:id="@+id/nav_trackOrder"
+                android:icon="@drawable/ic_tracking"
+                android:title="@string/track_orders" />
+
+            <item
+                android:id="@+id/nav_myAccount"
+                android:icon="@drawable/ic_account"
+                android:title="@string/my_account" />
+
+            <item
+                android:id="@+id/nav_newsFeed"
+                android:icon="@drawable/ic_newsfeed"
+                android:title="@string/news_feed" />
+
+            <item
+                android:id="@+id/nav_wishList"
+                android:icon="@drawable/ic_favorite_border"
+                android:title="@string/my_wishList" />
+    </group>
+</menu>
+
