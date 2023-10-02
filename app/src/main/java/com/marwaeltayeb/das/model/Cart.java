@@ -8,15 +8,9 @@ public class Cart {
     private int userId;
     @SerializedName("productId")
     private int productId;
-    @SerializedName("productColor")
-    private String productColor;
-    @SerializedName("productSize")
-    private String productSize;
 
-    public Cart(int userId, int productId, String productColor, String productSize) {
+    public Cart(int userId, int productId) {
         this.userId = userId;
         this.productId = productId;
-        this.productColor = productColor;
-        this.productSize = productSize;
     }
 }

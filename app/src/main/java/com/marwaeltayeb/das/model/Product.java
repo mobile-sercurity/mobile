@@ -5,12 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class Product implements Parcelable {
 
-    private String colorSelect = "";
-    private String sizeSelect = "";
     @SerializedName("id")
     private int productId;
     @SerializedName("product_name")
@@ -31,20 +27,14 @@ public class Product implements Parcelable {
     private int isInCart;
     // Include child Parcelable objects
     private Product mInfo;
-    @SerializedName("color")
-    private String productColor;
-    @SerializedName("size")
-    private String productSize;
 
 
-    public Product(String productName, double productPrice, int productQuantity, String productSupplier, String productCategory, String productColor, String productSize) {
+    public Product(String productName, double productPrice, int productQuantity, String productSupplier, String productCategory) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
         this.productSupplier = productSupplier;
         this.productCategory = productCategory;
-        this.productColor = productColor;
-        this.productSize = productSize;
     }
 
     public Product() { }
@@ -81,25 +71,6 @@ public class Product implements Parcelable {
         this.isInCart = isInCart ? 1 : 0;
     }
 
-    public String getProductColor() {
-        return productColor;
-    }
-    public String getProductSize() {
-        return productSize;
-    }
-    public String getColorSelect() {
-        return colorSelect;
-    }
-    public String getSizeSelect() {
-        return sizeSelect;
-    }
-    public void setColorSelect(String color) {
-        this.colorSelect = color;
-    }
-    public void setSizeSelect(String size) {
-        this.sizeSelect = size;
-    }
-
     // Write the values to be saved to the `Parcel`.
     @Override
     public void writeToParcel(Parcel out, int flags) {
@@ -113,8 +84,6 @@ public class Product implements Parcelable {
         out.writeInt(isFavourite);
         out.writeInt(isInCart);
         out.writeParcelable(mInfo, flags);
-        out.writeString(productColor);
-        out.writeString(productSize);
     }
 
     // Retrieve the values written into the `Parcel`.
@@ -129,8 +98,6 @@ public class Product implements Parcelable {
         isFavourite = in.readInt();
         isInCart = in.readInt();
         mInfo = in.readParcelable(Product.class.getClassLoader());
-        productColor = in.readString();
-        productSize = in.readString();
     }
 
     @Override

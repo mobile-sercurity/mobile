@@ -1,11 +1,8 @@
 package com.marwaeltayeb.das.adapter;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 import static com.marwaeltayeb.das.utils.Constant.LOCALHOST;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,14 +69,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         currentProduct = productsInCart.get(position);
         holder.binding.txtProductName.setText(currentProduct.getProductName());
-//        Log.d(TAG,"===========Color: " + currentProduct.getProductColor());
-//        Log.d(TAG,"===========Size: " + currentProduct.getProductSize());
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         String formattedPrice = formatter.format(currentProduct.getProductPrice());
         holder.binding.txtProductPrice.setText(formattedPrice + " VNĐ");
-        holder.binding.colorCart.setBackgroundColor(Color.parseColor(currentProduct.getProductColor()));
-        holder.binding.sizeCart.setText(currentProduct.getProductSize());
 
         // Load the Product image into ImageView
         String imageUrl = LOCALHOST + currentProduct.getProductImage().replaceAll("\\\\", "/");
