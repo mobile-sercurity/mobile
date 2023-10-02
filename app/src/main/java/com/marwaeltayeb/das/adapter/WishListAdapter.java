@@ -168,7 +168,12 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
         }
 
         private void insertToCart(RequestCallback callback) {
-            Cart cart = new Cart(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
+            Cart cart = new Cart(
+                    LoginUtils.getInstance(mContext).getUserInfo().getId(),
+                    currentProduct.getProductId(),
+                    currentProduct.getColorSelect(),
+                    currentProduct.getSizeSelect()
+            );
             toCartViewModel.addToCart(cart, callback);
         }
 

@@ -1,5 +1,6 @@
 package com.marwaeltayeb.das.view;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 import static com.marwaeltayeb.das.storage.LanguageUtils.loadLocale;
 import static com.marwaeltayeb.das.utils.Constant.LOCALHOST;
 import static com.marwaeltayeb.das.utils.Constant.PRODUCT;
@@ -10,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -22,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.marwaeltayeb.das.R;
 import com.marwaeltayeb.das.adapter.ReviewAdapter;
 import com.marwaeltayeb.das.adapter.ColorAdapter;
+import com.marwaeltayeb.das.adapter.SizeAdapter;
 import com.marwaeltayeb.das.databinding.ActivityDetailsBinding;
 import com.marwaeltayeb.das.model.Cart;
 import com.marwaeltayeb.das.model.Product;
@@ -44,8 +48,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private ReviewAdapter reviewAdapter;
 
     private ColorAdapter colorAdapter;
+    private SizeAdapter sizeAdapter;
     private List<Review> reviewList;
     private List<String> listColor;
+    private List<String> listSize;
     private Product product;
 
     @Override
@@ -67,6 +73,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         setUpRecycleView();
 
         getReviewsOfProduct();
+        getColorList();
+        getSizeList();
     }
 
     private void setUpRecycleView() {
@@ -79,7 +87,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         // Receive the product object
         product = getIntent().getParcelableExtra(PRODUCT);
 
-        Log.d(TAG,"isFavourite " + product.isFavourite() + " isInCart " + product.isInCart());
+        Log.d(TAG,"" + product);
+//        Log.d(TAG,"isFavourite " + product.isFavourite() + " isInCart " + product.isInCart());
 
         // Set Custom ActionBar Layout
         ActionBar actionBar = getSupportActionBar();
@@ -93,21 +102,50 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         binding.colorTitle.setText("Chọn màu");
         binding.sizeTitle.setText("Chọn cỡ");
 
-        listColor = new ArrayList<>();
-        listColor.add("#854949");
-        listColor.add("#000000");
-        listColor.add("#456456");
-        colorAdapter = new ColorAdapter(this, listColor);
-        binding.colorList.setAdapter(colorAdapter);
-
-
-
         String imageUrl = LOCALHOST + product.getProductImage().replaceAll("\\\\", "/");
         Glide.with(this)
                 .load(imageUrl)
                 .into(binding.imageOfProduct);
     }
 
+    private void getColorList() {
+//        Get list color
+        String[] parts = product.getProductColor().substring(1, product.getProductColor().length() - 1).split(", ");
+        listColor = new ArrayList<>();
+        for (String part : parts) {
+            String element = part.substring(1, part.length() - 1);
+            listColor.add(element);
+        }
+
+        if(listColor.size() > 5){
+            binding.colorList.getLayoutParams().height = 240;
+        }
+        colorAdapter = new ColorAdapter(this, listColor, this::onColorClick);
+        binding.colorList.setAdapter(colorAdapter);
+        colorAdapter.notifyDataSetChanged();
+    }
+    public void onColorClick(String color) {
+        product.setColorSelect(color);
+        Log.d(TAG,"===========Color: " + product.getColorSelect());
+    }
+    private void getSizeList() {
+        String[] part1s = product.getProductSize().substring(1, product.getProductSize().length() - 1).split(", ");
+        listSize = new ArrayList<>();
+        for (String part : part1s) {
+            String element = part.substring(1, part.length() - 1);
+            listSize.add(element);
+        }
+        if(listSize.size() > 5){
+            binding.sizeList.getLayoutParams().height = 240;
+        }
+        sizeAdapter = new SizeAdapter(this, listSize, this::onSizeClick);
+        binding.sizeList.setAdapter(sizeAdapter);
+        sizeAdapter.notifyDataSetChanged();
+    }
+    public void onSizeClick(String size) {
+        product.setSizeSelect(size);
+        Log.d(TAG,"===========Size: " + product.getSizeSelect());
+    }
     private void getReviewsOfProduct() {
         reviewViewModel.getReviews(product.getProductId()).observe(this, reviewApiResponse -> {
             if (reviewApiResponse != null) {
@@ -148,7 +186,16 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void insertToCart(RequestCallback callback) {
-        Cart cart = new Cart(LoginUtils.getInstance(this).getUserInfo().getId(), product.getProductId());
+        Log.d(TAG,"===========Size: " + product.getSizeSelect());
+        Log.d(TAG,"===========Color: " + product.getColorSelect());
+
+        Cart cart = new Cart(
+                LoginUtils.getInstance(this).getUserInfo().getId(),
+                product.getProductId(),
+                product.getColorSelect(),
+                product.getSizeSelect()
+        );
+//        Log.d(TAG,"===========Cart: " + product.getColorSelect());
         toCartViewModel.addToCart(cart, callback);
     }
 

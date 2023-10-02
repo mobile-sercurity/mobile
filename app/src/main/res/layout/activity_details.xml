@@ -66,25 +66,31 @@
                 android:textSize="@dimen/dimen20sp"
                 tools:text="Chọn màu" />
 
-            <ListView
+            <GridView
                 android:id="@+id/colorList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:numColumns="5"/>
 
             <TextView
                 android:id="@+id/sizeTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dimen20sp"
                 tools:text="Chọn cỡ" />
 
-            <ListView
+            <GridView
                 android:id="@+id/sizeList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:numColumns="5"/>
 
             <Button
                 android:id="@+id/addToCart"
