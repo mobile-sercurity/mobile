@@ -229,7 +229,12 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
         }
 
         private void insertToCart(RequestCallback callback) {
-            Cart cart = new Cart(LoginUtils.getInstance(mContext).getUserInfo().getId(), product.getProductId());
+            Cart cart = new Cart(
+                    LoginUtils.getInstance(mContext).getUserInfo().getId(),
+                    product.getProductId(),
+                    product.getColorSelect(),
+                    product.getSizeSelect()
+            );
             toCartViewModel.addToCart(cart, callback);
         }
 

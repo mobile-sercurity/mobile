@@ -8,14 +8,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        card_view:cardCornerRadius="@dimen/dimen10dp"
-        card_view:cardElevation="@dimen/dimen10dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:elevation="@dimen/dimen1dp">
+        card_view:cardCornerRadius="8dp"
+        card_view:cardUseCompatPadding="true">
 
         <Button
             android:id="@+id/size_item"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="35dp"
             android:background="@color/white"
             android:text="34"/>
