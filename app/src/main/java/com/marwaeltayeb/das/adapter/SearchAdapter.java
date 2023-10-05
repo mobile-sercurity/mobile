@@ -94,7 +94,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
         // If product is added to cart
         if (currentProduct.isInCart()==1) {
-            holder.binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
+//            holder.binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
         }
     }
 
@@ -122,8 +122,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             // Register a callback to be invoked when this view is clicked.
             itemView.setOnClickListener(this);
             binding.imgFavourite.setOnClickListener(this);
-            binding.imgCart.setOnClickListener(this);
-            binding.addToCart.setOnClickListener(this);
+//            binding.imgCart.setOnClickListener(this);
+//            binding.addToCart.setOnClickListener(this);
         }
 
         @Override
@@ -141,12 +141,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                 case R.id.imgFavourite:
                     toggleFavourite();
                     break;
-                case R.id.imgCart:
-                    toggleProductsInCart();
-                    break;
-                case R.id.addToCart:
-                    addToCart();
-                    break;
+//                case R.id.imgCart:
+//                    toggleProductsInCart();
+//                    break;
+//                case R.id.addToCart:
+//                    addToCart();
+//                    break;
                 default: // Should not get here
             }
         }
@@ -173,33 +173,33 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
         private void toggleProductsInCart() {
             // If Product is not added to cart
-            if (currentProduct.isInCart() != 1) {
-                binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-                insertToCart(() -> {
-                    currentProduct.setIsInCart(true);
-                    notifyDataSetChanged();
-                });
-                showSnackBar("Added To Cart");
-            } else {
-                binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
-                deleteFromCart(() -> {
-                    currentProduct.setIsInCart(false);
-                    notifyDataSetChanged();
-                });
-                showSnackBar("Removed From Cart");
-            }
+//            if (currentProduct.isInCart() != 1) {
+//                binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
+//                insertToCart(() -> {
+//                    currentProduct.setIsInCart(true);
+//                    notifyDataSetChanged();
+//                });
+//                showSnackBar("Added To Cart");
+//            } else {
+//                binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
+//                deleteFromCart(() -> {
+//                    currentProduct.setIsInCart(false);
+//                    notifyDataSetChanged();
+//                });
+//                showSnackBar("Removed From Cart");
+//            }
         }
 
         private void addToCart() {
             // If Product is not added to cart
-            if (currentProduct.isInCart() != 1) {
-                binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-                insertToCart(() -> {
-                    currentProduct.setIsInCart(true);
-                    notifyDataSetChanged();
-                });
-                showSnackBar("Added To Cart");
-            }
+//            if (currentProduct.isInCart() != 1) {
+//                binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
+//                insertToCart(() -> {
+//                    currentProduct.setIsInCart(true);
+//                    notifyDataSetChanged();
+//                });
+//                showSnackBar("Added To Cart");
+//            }
         }
 
         private void showSnackBar(String text) {

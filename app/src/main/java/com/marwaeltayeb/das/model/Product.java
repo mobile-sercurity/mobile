@@ -35,9 +35,19 @@ public class Product implements Parcelable {
     private String productColor;
     @SerializedName("size")
     private String productSize;
+    @SerializedName("cartID")
+    private int cartID;
+    @SerializedName("cart_color")
+    private String cartColor;
+    @SerializedName("cart_size")
+    private String cartSize;
 
 
-    public Product(String productName, double productPrice, int productQuantity, String productSupplier, String productCategory, String productColor, String productSize) {
+    public Product(
+            String productName, double productPrice, int productQuantity,
+            String productSupplier, String productCategory, String productColor,
+            String productSize, int cartID, String cartColor, String cartSize
+    ) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
@@ -45,12 +55,24 @@ public class Product implements Parcelable {
         this.productCategory = productCategory;
         this.productColor = productColor;
         this.productSize = productSize;
+        this.cartID = cartID;
+        this.cartColor = cartColor;
+        this.cartSize = cartSize;
     }
 
     public Product() { }
 
     public int getProductId() {
         return productId;
+    }
+    public int getCartID() {
+        return cartID;
+    }
+    public String getCartColor() {
+        return cartColor;
+    }
+    public String getCartSize() {
+        return cartSize;
     }
 
     public String getProductName() {
@@ -115,6 +137,9 @@ public class Product implements Parcelable {
         out.writeParcelable(mInfo, flags);
         out.writeString(productColor);
         out.writeString(productSize);
+        out.writeInt(cartID);
+        out.writeString(cartColor);
+        out.writeString(cartSize);
     }
 
     // Retrieve the values written into the `Parcel`.
@@ -131,6 +156,9 @@ public class Product implements Parcelable {
         mInfo = in.readParcelable(Product.class.getClassLoader());
         productColor = in.readString();
         productSize = in.readString();
+        cartID = in.readInt();
+        cartColor = in.readString();
+        cartSize = in.readString();
     }
 
     @Override

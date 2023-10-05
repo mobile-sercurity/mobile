@@ -103,9 +103,9 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
             }
 
             // If product is added to cart
-            if (product.isInCart() == 1) {
-                holder.binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-            }
+//            if (product.isInCart() == 1) {
+//                holder.binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
+//            }
 
         } else {
             Toast.makeText(mContext, "Product is null", Toast.LENGTH_LONG).show();
@@ -152,7 +152,7 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
             // Register a callback to be invoked when this view is clicked.
             itemView.setOnClickListener(this);
             binding.imgFavourite.setOnClickListener(this);
-            binding.imgCart.setOnClickListener(this);
+//            binding.imgCart.setOnClickListener(this);
         }
 
         @Override
@@ -170,9 +170,9 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
                 case R.id.imgFavourite:
                     toggleFavourite();
                     break;
-                case R.id.imgCart:
-                    toggleProductsInCart();
-                    break;
+//                case R.id.imgCart:
+//                    toggleProductsInCart();
+//                    break;
                 default: // Should not get here
             }
         }
@@ -199,14 +199,14 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
         private void toggleProductsInCart() {
             // If Product is not added to cart
             if (product.isInCart() != 1) {
-                binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
+//                binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
                 insertToCart(() -> {
                     product.setIsInCart(true);
                     notifyDataSetChanged();
                 });
                 showSnackBar("Added To Cart");
             } else {
-                binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
+//                binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
                 deleteFromCart(() -> {
                     product.setIsInCart(false);
                     notifyDataSetChanged();

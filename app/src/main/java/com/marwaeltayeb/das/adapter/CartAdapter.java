@@ -1,9 +1,14 @@
 package com.marwaeltayeb.das.adapter;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+import static android.content.ContentValues.TAG;
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.marwaeltayeb.das.utils.Constant.LOCALHOST;
+import static com.marwaeltayeb.das.utils.Constant.PRODUCTCOLOR;
+import static com.marwaeltayeb.das.utils.Constant.PRODUCTID;
+import static com.marwaeltayeb.das.utils.Constant.PRODUCTSIZE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +29,7 @@ import com.marwaeltayeb.das.model.Favorite;
 import com.marwaeltayeb.das.model.Product;
 import com.marwaeltayeb.das.storage.LoginUtils;
 import com.marwaeltayeb.das.utils.RequestCallback;
+import com.marwaeltayeb.das.view.ShippingAddressActivity;
 import com.marwaeltayeb.das.viewmodel.AddFavoriteViewModel;
 import com.marwaeltayeb.das.viewmodel.FromCartViewModel;
 import com.marwaeltayeb.das.viewmodel.RemoveFavoriteViewModel;
@@ -72,14 +78,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         currentProduct = productsInCart.get(position);
         holder.binding.txtProductName.setText(currentProduct.getProductName());
-//        Log.d(TAG,"===========Color: " + currentProduct.getProductColor());
-//        Log.d(TAG,"===========Size: " + currentProduct.getProductSize());
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         String formattedPrice = formatter.format(currentProduct.getProductPrice());
         holder.binding.txtProductPrice.setText(formattedPrice + " VNĐ");
-        holder.binding.colorCart.setBackgroundColor(Color.parseColor(currentProduct.getProductColor()));
-        holder.binding.sizeCart.setText(currentProduct.getProductSize());
+        holder.binding.colorCart.setBackgroundColor(Color.parseColor(currentProduct.getCartColor()));
+        holder.binding.sizeCart.setText(currentProduct.getCartSize());
 
         // Load the Product image into ImageView
         String imageUrl = LOCALHOST + currentProduct.getProductImage().replaceAll("\\\\", "/");
@@ -87,10 +91,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .load(imageUrl)
                 .into(holder.binding.imgProductImage);
 
-        // If product is inserted
-        if (currentProduct.isFavourite() == 1) {
-            holder.binding.imgFavourite.setImageResource(R.drawable.ic_favorite_pink);
-        }
     }
 
     @Override
@@ -125,9 +125,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 case R.id.card_view:
                     // Send product through click
                     clickHandler.onClick(currentProduct);
+//                    Log.d(TAG,""+currentProduct.getProductColor());
                     break;
                 case R.id.imgFavourite:
-                    toggleFavourite();
+                    toggleFavourite(currentProduct);
                     break;
                 case R.id.imgCart:
                     deleteProductsInCart();
@@ -136,23 +137,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             }
         }
 
-        private void toggleFavourite() {
-            // If favorite is not bookmarked
-            if (currentProduct.isFavourite() != 1) {
-                binding.imgFavourite.setImageResource(R.drawable.ic_favorite_pink);
-                insertFavoriteProduct(() -> {
-                    currentProduct.setIsFavourite(true);
-                    notifyDataSetChanged();
-                });
-                showSnackBar("Bookmark Added");
-            } else {
-                binding.imgFavourite.setImageResource(R.drawable.ic_favorite_border);
-                deleteFavoriteProduct(() -> {
-                    currentProduct.setIsFavourite(false);
-                    notifyDataSetChanged();
-                });
-                showSnackBar("Bookmark Removed");
-            }
+        private void toggleFavourite(Product currentProduct) {
+            Log.d(TAG,""+currentProduct.getCartID());
+            Intent shippingIntent = new Intent(mContext, ShippingAddressActivity.class);
+            shippingIntent.putExtra(PRODUCTID, currentProduct.getCartID());
+            shippingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(shippingIntent);
         }
 
         private void deleteProductsInCart() {

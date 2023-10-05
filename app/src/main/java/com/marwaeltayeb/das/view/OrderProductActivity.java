@@ -1,9 +1,11 @@
 package com.marwaeltayeb.das.view;
 
+import static android.content.ContentValues.TAG;
 import static com.marwaeltayeb.das.utils.Constant.PRODUCTID;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -50,7 +52,7 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
         int productId = intent.getIntExtra(PRODUCTID, 0);
 
         Ordering ordering = new Ordering(nameOnCard,cardNumber,fullDate,userId,productId);
-
+//        Log.d(TAG,""+ordering);
         orderingViewModel.orderProduct(ordering).observe(this, responseBody -> {
             try {
                 Toast.makeText(OrderProductActivity.this, responseBody.string() + "", Toast.LENGTH_SHORT).show();

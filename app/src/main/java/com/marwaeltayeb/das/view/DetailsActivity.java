@@ -35,6 +35,7 @@ import com.marwaeltayeb.das.utils.RequestCallback;
 import com.marwaeltayeb.das.viewmodel.ReviewViewModel;
 import com.marwaeltayeb.das.viewmodel.ToCartViewModel;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +99,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         ((TextView) findViewById(R.id.action_bar_title)).setText(product.getProductName());
 
         binding.nameOfProduct.setText(product.getProductName());
-        binding.priceOfProduct.setText(String.valueOf(product.getProductPrice()));
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String formattedPrice = formatter.format(product.getProductPrice());
+        binding.priceOfProduct.setText(String.valueOf(formattedPrice + " VNĐ"));
         binding.colorTitle.setText("Chọn màu");
         binding.sizeTitle.setText("Chọn cỡ");
 

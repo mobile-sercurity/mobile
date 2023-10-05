@@ -27,4 +27,6 @@ public class Constant {
     public static final String PRODUCTID = "Product_id";
 
     public static final String KEYWORD = "keyword";
+    public static final String PRODUCTCOLOR = "product_color";
+    public static final String PRODUCTSIZE = "product_size";
 }
