@@ -24,6 +24,7 @@ public class SizeAdapter extends BaseAdapter {
 
     private List<String> itemList;
     private OnSizeClickListener onSizeClickListener; // Add this variable
+    private int positionSelect = -1;
 
     public SizeAdapter(Context context, List<String> itemList, OnSizeClickListener onSizeClickListener) {
         mContext = context;
@@ -51,7 +52,9 @@ public class SizeAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
+    public void setItemSelect(int position) {
+        this.positionSelect = position;
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
@@ -68,12 +71,18 @@ public class SizeAdapter extends BaseAdapter {
         String item = itemList.get(position);
         holder.sizeItem.setText(item);
 
+        if(position == positionSelect){
+            holder.sizeItem.setBackgroundResource(R.drawable.border);
+        } else {
+            holder.sizeItem.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
 
         holder.sizeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.sizeItem.setBackgroundResource(R.drawable.border);
                 onSizeClickListener.onSizeClick(item);
+                setItemSelect(position);
+                notifyDataSetChanged();
                 Toast.makeText(mContext, "Select Size: " + item, Toast.LENGTH_SHORT).show();
             }
         });

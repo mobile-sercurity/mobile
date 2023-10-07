@@ -27,6 +27,7 @@ public class ColorAdapter extends BaseAdapter {
     private OnColorClickListener onColorClickListener; // Add this variable
 
     private List<String> itemList;
+    private int positionSelect = -1;
 
     public ColorAdapter(Context context, List<String> itemList, OnColorClickListener onColorClickListener) {
         mContext = context;
@@ -53,10 +54,14 @@ public class ColorAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+//    @Override
+    public void setItemSelect(int position) {
+        this.positionSelect = position;
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Drawable colorDrawable = mContext.getResources().getDrawable(R.drawable.border);
+//        Drawable colorDrawable = mContext.getResources().getDrawable(R.drawable.border);
 
         ViewHolder holder;
         if (convertView == null) {
@@ -69,16 +74,25 @@ public class ColorAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
         String item = itemList.get(position);
+        Drawable colorDrawable = getColorDrawable(item);
+
+        if(position == positionSelect){
+        holder.colorItem.setBackground(colorDrawable);
+
+        } else {
         holder.colorItem.setBackgroundColor(Color.parseColor(item));
+
+        }
 
         holder.colorItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable colorDrawable = getColorDrawable(item);
-                holder.colorItem.setBackground(colorDrawable);
                 onColorClickListener.onColorClick(item);
-                Toast.makeText(mContext, "Select Color: " + item, Toast.LENGTH_SHORT).show();
+                setItemSelect(position);
+                notifyDataSetChanged();
+//                Toast.makeText(mContext, "Select Color: " + item, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -41,12 +41,14 @@ public class Product implements Parcelable {
     private String cartColor;
     @SerializedName("cart_size")
     private String cartSize;
+    @SerializedName("listImage")
+    private String listImage;
 
 
     public Product(
             String productName, double productPrice, int productQuantity,
             String productSupplier, String productCategory, String productColor,
-            String productSize, int cartID, String cartColor, String cartSize
+            String productSize, int cartID, String cartColor, String cartSize,String listImage
     ) {
         this.productName = productName;
         this.productPrice = productPrice;
@@ -58,6 +60,7 @@ public class Product implements Parcelable {
         this.cartID = cartID;
         this.cartColor = cartColor;
         this.cartSize = cartSize;
+        this.listImage = listImage;
     }
 
     public Product() { }
@@ -85,6 +88,9 @@ public class Product implements Parcelable {
 
     public String getProductImage() {
         return productImage;
+    }
+    public String getProductListImage() {
+        return listImage;
     }
 
     public int isFavourite() {
@@ -140,6 +146,7 @@ public class Product implements Parcelable {
         out.writeInt(cartID);
         out.writeString(cartColor);
         out.writeString(cartSize);
+        out.writeString(listImage);
     }
 
     // Retrieve the values written into the `Parcel`.
@@ -159,6 +166,7 @@ public class Product implements Parcelable {
         cartID = in.readInt();
         cartColor = in.readString();
         cartSize = in.readString();
+        listImage = in.readString();
     }
 
     @Override

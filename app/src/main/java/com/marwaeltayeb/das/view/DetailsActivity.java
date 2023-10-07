@@ -11,8 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -37,6 +39,7 @@ import com.marwaeltayeb.das.viewmodel.ToCartViewModel;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -88,7 +91,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         // Receive the product object
         product = getIntent().getParcelableExtra(PRODUCT);
 
-        Log.d(TAG,"" + product);
+//        Log.d(TAG,"" + product);
 //        Log.d(TAG,"isFavourite " + product.isFavourite() + " isInCart " + product.isInCart());
 
         // Set Custom ActionBar Layout
@@ -106,9 +109,55 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         binding.sizeTitle.setText("Chọn cỡ");
 
         String imageUrl = LOCALHOST + product.getProductImage().replaceAll("\\\\", "/");
-        Glide.with(this)
-                .load(imageUrl)
-                .into(binding.imageOfProduct);
+//        Glide.with(this)
+//                .load(imageUrl)
+//                .into(binding.imageOfProduct);
+        flipImages(product.getProductListImage());
+
+    }
+
+    private void flipImages(String listImage) {
+        String[] parts = listImage.substring(1, listImage.length() - 1).split(", ");
+        List<String> images = new ArrayList<>();
+        for (String part : parts) {
+            String element = LOCALHOST + part.substring(1, part.length() - 1).replaceAll("\\\\", "/");
+            images.add(element);
+        }
+        for (String image : images) {
+            ImageView imageView = new ImageView(this);
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, // width
+                    ViewGroup.LayoutParams.MATCH_PARENT  // height
+            );
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setLayoutParams(layoutParams);
+
+            Glide.with(this)
+                .load(image)
+                .into(imageView);
+//            imageView.setBackgroundResource(image);
+            binding.imageOfProduct.addView(imageView);
+        }
+
+        binding.imageOfProduct.setFlipInterval(500);
+//        binding.imageOfProduct.setAutoStart(true);
+
+        // Set the animation for the view that enters the screen
+        binding.imageOfProduct.setInAnimation(this, R.anim.slide_in_right);
+        binding.imageOfProduct.setOutAnimation(this, R.anim.slide_out_left);
+        // Set the animation for the view leaving th screen
+        binding.prevBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                binding.imageOfProduct.showPrevious();
+            }
+        });
+        binding.nextBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                binding.imageOfProduct.showNext();
+            }
+        });
+
+
     }
 
     private void getColorList() {
@@ -129,7 +178,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
     public void onColorClick(String color) {
         product.setColorSelect(color);
-        Log.d(TAG,"===========Color: " + product.getColorSelect());
     }
     private void getSizeList() {
         String[] part1s = product.getProductSize().substring(1, product.getProductSize().length() - 1).split(", ");
@@ -147,7 +195,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
     public void onSizeClick(String size) {
         product.setSizeSelect(size);
-        Log.d(TAG,"===========Size: " + product.getSizeSelect());
     }
     private void getReviewsOfProduct() {
         reviewViewModel.getReviews(product.getProductId()).observe(this, reviewApiResponse -> {
@@ -189,16 +236,12 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void insertToCart(RequestCallback callback) {
-        Log.d(TAG,"===========Size: " + product.getSizeSelect());
-        Log.d(TAG,"===========Color: " + product.getColorSelect());
-
         Cart cart = new Cart(
                 LoginUtils.getInstance(this).getUserInfo().getId(),
                 product.getProductId(),
                 product.getColorSelect(),
                 product.getSizeSelect()
         );
-//        Log.d(TAG,"===========Cart: " + product.getColorSelect());
         toCartViewModel.addToCart(cart, callback);
     }
 
