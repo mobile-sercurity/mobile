@@ -13,7 +13,7 @@
     <string name="sign_out">تسجيل الخروج</string>
     <string name="forget_password">هل نسيت كلمة المرور</string>
     <string name="sign_in">تسجيل الدخول</string>
-    <string name="new_customer_create_your_account">عميل جديد؟ <font color='#008CFF'>أنشئ حسابك</font></string>
+    <string name="new_customer_create_your_account">عميل جديد؟ <font color='#D99D25'>أنشئ حسابك</font></string>
     <string name="_2020_das">سوق 2020 مروة الطيب. كل الحقوق محفوظة</string>
     <string name="eight_characters">كلمةالمرور يجب أن تتكون من 8 أحرف على الأقل</string>
     <string name="create_your_account">أنشئ حسابك</string>

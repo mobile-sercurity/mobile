@@ -84,7 +84,7 @@ public interface Api {
     Call<ResponseBody> addToCart(@Body Cart cart);
 
     @DELETE("carts/remove")
-    Call<ResponseBody> removeFromCart(@Query("userId") int userId, @Query("productId") int productId);
+    Call<ResponseBody> removeFromCart(@Query("userId") int userId, @Query("cartId") int cartId);
 
     @GET("carts")
     Call<CartApiResponse> getProductsInCart(@Query("userId") int userId);

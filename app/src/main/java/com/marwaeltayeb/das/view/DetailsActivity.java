@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -225,13 +226,17 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             allReviewIntent.putExtra(PRODUCT_ID,product.getProductId());
             startActivity(allReviewIntent);
         }else if(view.getId() == R.id.addToCart){
-            insertToCart(() -> product.setIsInCart(true));
-            Intent cartIntent = new Intent(DetailsActivity.this, CartActivity.class);
-            startActivity(cartIntent);
-        }else if(view.getId() == R.id.buy){
-            Intent shippingIntent = new Intent(DetailsActivity.this, ShippingAddressActivity.class);
-            shippingIntent.putExtra(PRODUCTID, product.getProductId());
-            startActivity(shippingIntent);
+            if(product.getColorSelect() == ""){
+                Toast.makeText(this, "Please Select Color", Toast.LENGTH_SHORT).show();
+            }else if(product.getSizeSelect() == "" ) {
+                Toast.makeText(this, "Please Select Size", Toast.LENGTH_SHORT).show();
+            }else{
+                insertToCart(() -> product.setIsInCart(true));
+                Intent cartIntent = new Intent(DetailsActivity.this, CartActivity.class);
+                startActivity(cartIntent);
+
+            }
+
         }
     }
 

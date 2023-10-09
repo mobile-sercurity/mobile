@@ -12,7 +12,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="forget_password">Forget password</string>
     <string name="sign_in">Sign in</string>
-    <string name="new_customer_create_your_account">New Customer? <font color='#008CFF'>Create Your Account</font></string>
+    <string name="new_customer_create_your_account">New Customer? <font color='#D99D25'>Create Your Account</font></string>
     <string name="_2020_das">2020 Das by Marwa Eltayeb. All Rights Reserved</string>
     <string name="eight_characters">Passwords must be at least 8 characters</string>
     <string name="create_your_account">Create your account</string>

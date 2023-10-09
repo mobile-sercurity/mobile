@@ -16,7 +16,7 @@ public class FromCartViewModel extends ViewModel {
         fromCartRepository = new FromCartRepository();
     }
 
-    public LiveData<ResponseBody> removeFromCart(int userId, int productId, RequestCallback callback) {
-        return fromCartRepository.removeFromCart(userId, productId, callback);
+    public LiveData<ResponseBody> removeFromCart(int userId, int cartId, RequestCallback callback) {
+        return fromCartRepository.removeFromCart(userId, cartId, callback);
     }
 }

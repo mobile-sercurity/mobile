@@ -151,15 +151,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 notifyDataSetChanged();
             });
             productsInCart.remove(getBindingAdapterPosition());
+
             notifyItemRemoved(getBindingAdapterPosition());
             notifyItemRangeChanged(getBindingAdapterPosition(), productsInCart.size());
             showSnackBar("Removed From Cart");
+//            showSnackBar("Xóa nhé");
         }
 
         private void showSnackBar(String text) {
             Snackbar.make(itemView, text, Snackbar.LENGTH_SHORT).show();
         }
-
         private void insertFavoriteProduct(RequestCallback callback) {
             Favorite favorite = new Favorite(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
             addFavoriteViewModel.addFavorite(favorite, callback);
@@ -170,7 +171,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
 
         private void deleteFromCart(RequestCallback callback) {
-            fromCartViewModel.removeFromCart(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId(), callback);
+            Log.d(TAG,""+LoginUtils.getInstance(mContext).getUserInfo().getId());
+            Log.d(TAG,""+currentProduct.getCartID());
+            fromCartViewModel.removeFromCart(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getCartID(), callback);
         }
     }
 }

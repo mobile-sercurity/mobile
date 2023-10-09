@@ -17,9 +17,9 @@ public class FromCartRepository {
 
     private static final String TAG = FromCartRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> removeFromCart(int userId, int productId, RequestCallback callback) {
+    public LiveData<ResponseBody> removeFromCart(int userId, int cartId, RequestCallback callback) {
         final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
-        RetrofitClient.getInstance().getApi().removeFromCart(userId, productId).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().removeFromCart(userId, cartId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d(TAG,"onResponse" + response.code());
