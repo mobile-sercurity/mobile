@@ -4,8 +4,11 @@ public class Constant {
 
     private Constant(){}
 
-    public static final String LOCALHOST = "http://192.168.40.102:5000/";
+//    public static final String LOCALHOST = "http://192.168.159.1:5000/";
 //    public static final String LOCALHOST = "http://172.16.2.81:5000/";
+//    public static final String LOCALHOST = "http://192.168.0.102:5000/";
+//    public static final String LOCALHOST = "http://10.10.70.40:5000/";
+    public static final String LOCALHOST = "http://192.168.101.193:5000/";
 
     // Constant Variables
     public static final String PRODUCT = "product";

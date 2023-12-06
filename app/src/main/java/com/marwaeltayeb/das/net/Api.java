@@ -8,6 +8,7 @@ import com.marwaeltayeb.das.model.History;
 import com.marwaeltayeb.das.model.HistoryApiResponse;
 import com.marwaeltayeb.das.model.Image;
 import com.marwaeltayeb.das.model.LoginApiResponse;
+import com.marwaeltayeb.das.model.LoginRequest;
 import com.marwaeltayeb.das.model.NewsFeedResponse;
 import com.marwaeltayeb.das.model.OrderApiResponse;
 import com.marwaeltayeb.das.model.Ordering;
@@ -42,8 +43,8 @@ public interface Api {
     @POST("users/register")
     Call<RegisterApiResponse> createUser(@Body User user);
 
-    @GET("users/login")
-    Call<LoginApiResponse> logInUser(@Query("email") String email, @Query("password") String password);
+    @POST("users/login")
+    Call<LoginApiResponse> logInUser(@Body LoginRequest loginRequest);
 
     @DELETE("users/{userId}")
     Call<ResponseBody> deleteAccount(@Header("authorization") String token , @Path("userId") int userId);

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.marwaeltayeb.das.model.LoginApiResponse;
+import com.marwaeltayeb.das.model.LoginRequest;
 import com.marwaeltayeb.das.net.RetrofitClient;
 
 import retrofit2.Call;
@@ -18,7 +19,8 @@ public class LoginRepository {
 
     public LiveData<LoginApiResponse> getLoginResponseData(String email, String password) {
         final MutableLiveData<LoginApiResponse> mutableLiveData = new MutableLiveData<>();
-        RetrofitClient.getInstance().getApi().logInUser(email, password).enqueue(new Callback<LoginApiResponse>() {
+        LoginRequest loginRequest = new LoginRequest(email, password);
+        RetrofitClient.getInstance().getApi().logInUser(loginRequest).enqueue(new Callback<LoginApiResponse>() {
             @Override
             public void onResponse(Call<LoginApiResponse> call, Response<LoginApiResponse> response) {
                 Log.d(TAG, "onResponse: Succeeded");
