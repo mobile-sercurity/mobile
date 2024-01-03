@@ -90,7 +90,7 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
             // Load the Product image into ImageView
             String imageUrl = LOCALHOST + product.getProductImage().replaceAll("\\\\", "/");
 //            Log.d("imageUrl", imageUrl);
-            Log.d("imageUrl", imageUrl);
+//            Log.d("imageUrl", imageUrl);
             Glide.with(mContext)
                     .load(imageUrl)
                     .into(holder.binding.imgProductImage);

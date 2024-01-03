@@ -38,7 +38,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/myOrders"
+                android:id="@+id/pinSetting"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
@@ -46,10 +46,38 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/touch_feedback"
+                android:drawableStart="@drawable/ic_secure"
+                android:drawablePadding="20dp"
+                android:gravity="start|center"
+                android:text="PIN Setting"
+                android:textColor="@color/vDarkGray"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/myOrders"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/touch_feedback"
                 android:drawableStart="@drawable/ic_order"
                 android:drawablePadding="20dp"
                 android:gravity="start|center"
                 android:text="@string/my_orders"
+                android:textColor="@color/vDarkGray"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/cardSetting"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/touch_feedback"
+                android:drawableStart="@drawable/ic_cash"
+                android:drawablePadding="20dp"
+                android:gravity="start|center"
+                android:text="Card Credit"
                 android:textColor="@color/vDarkGray"
                 android:textSize="18sp" />
 

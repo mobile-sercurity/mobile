@@ -17,7 +17,7 @@ public class Order implements Serializable {
     @SerializedName("price")
     private double productPrice;
     @SerializedName("status")
-    private String orderDateStatus;
+    private int orderDateStatus;
     @SerializedName("name")
     private String userName;
     @SerializedName("address")
@@ -45,7 +45,7 @@ public class Order implements Serializable {
         return productName;
     }
 
-    public String getOrderDateStatus() {
+    public int getOrderDateStatus() {
         return orderDateStatus;
     }
 

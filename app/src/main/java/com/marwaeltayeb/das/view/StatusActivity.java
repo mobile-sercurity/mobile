@@ -14,6 +14,8 @@ import com.marwaeltayeb.das.R;
 import com.marwaeltayeb.das.databinding.ActivityStatusBinding;
 import com.marwaeltayeb.das.model.Order;
 
+import java.text.DecimalFormat;
+
 public class StatusActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int productId;
@@ -34,8 +36,33 @@ public class StatusActivity extends AppCompatActivity implements View.OnClickLis
         binding.userAddress.setText(order.getShippingAddress());
         binding.userPhone.setText(order.getShippingPhone());
         binding.txtProductName.setText(order.getProductName());
-        binding.txtProductPrice.setText(String.valueOf(order.getProductPrice()));
-        String status = getString(R.string.item, order.getOrderDateStatus());
+
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String formattedPrice = formatter.format(order.getProductPrice());
+        binding.txtProductPrice.setText(formattedPrice + " VNĐ");
+        String statusString = "Proceed";
+        switch(order.getOrderDateStatus()) {
+            case 0:
+                statusString = "Cancelled";
+                break;
+            case 1:
+                statusString = "Completed";
+                break;
+            case 2:
+                statusString = "Paid By Visa";
+                break;
+            case 3:
+                statusString = "Pending Confirm";
+                break;
+            case 4:
+                statusString = "Confirmed";
+                break;
+            case 5:
+                statusString = "Shipped";
+                break;
+            default:
+        }
+        String status = getString(R.string.item, statusString);
         binding.orderStatus.setText(status);
 
         binding.reOrder.setOnClickListener(this);

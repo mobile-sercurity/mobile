@@ -2,6 +2,9 @@ package com.marwaeltayeb.das.adapter;
 
 import static android.content.ContentValues.TAG;
 import static androidx.core.content.ContextCompat.startActivity;
+import static com.marwaeltayeb.das.utils.Constant.AMOUNT;
+import static com.marwaeltayeb.das.utils.Constant.CARTID;
+import static com.marwaeltayeb.das.utils.Constant.IS_CHECK_PIN;
 import static com.marwaeltayeb.das.utils.Constant.LOCALHOST;
 import static com.marwaeltayeb.das.utils.Constant.PRODUCTCOLOR;
 import static com.marwaeltayeb.das.utils.Constant.PRODUCTID;
@@ -140,7 +143,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private void toggleFavourite(Product currentProduct) {
             Log.d(TAG,""+currentProduct.getCartID());
             Intent shippingIntent = new Intent(mContext, ShippingAddressActivity.class);
-            shippingIntent.putExtra(PRODUCTID, currentProduct.getCartID());
+            shippingIntent.putExtra(IS_CHECK_PIN,"false");
+            shippingIntent.putExtra(CARTID, currentProduct.getCartID());
+            shippingIntent.putExtra(AMOUNT, currentProduct.getProductPrice());
             shippingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(shippingIntent);
         }

@@ -37,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_cart);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getResources().getString(R.string.cart));
+        actionBar.setTitle(getResources().getString(R.string.cart) );
 
         setUpRecyclerView();
 

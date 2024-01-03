@@ -11,6 +11,11 @@ public class LoginApiResponse {
     private String token;
     private boolean isAdmin;
 
+    private String card_month;
+    private String card_year;
+    private String name_on_card;
+    private String card_number;
+    private String cvc;
     public LoginApiResponse(String message) {
         this.message = message;
         this.error = true;
@@ -47,4 +52,9 @@ public class LoginApiResponse {
     public boolean isAdmin() {
         return isAdmin;
     }
+    public String getCardName() {return name_on_card;}
+    public String getCardNumber() {return card_number;}
+    public String cardCvc() {return cvc;}
+    public String getCardMonth() {return card_month;}
+    public String getCardYear() {return card_year;}
 }

@@ -1,5 +1,6 @@
 package com.marwaeltayeb.das.net;
 
+import com.marwaeltayeb.das.model.Card;
 import com.marwaeltayeb.das.model.Cart;
 import com.marwaeltayeb.das.model.CartApiResponse;
 import com.marwaeltayeb.das.model.Favorite;
@@ -9,10 +10,12 @@ import com.marwaeltayeb.das.model.HistoryApiResponse;
 import com.marwaeltayeb.das.model.Image;
 import com.marwaeltayeb.das.model.LoginApiResponse;
 import com.marwaeltayeb.das.model.LoginRequest;
+import com.marwaeltayeb.das.model.MalwareApiResponse;
 import com.marwaeltayeb.das.model.NewsFeedResponse;
 import com.marwaeltayeb.das.model.OrderApiResponse;
 import com.marwaeltayeb.das.model.Ordering;
 import com.marwaeltayeb.das.model.Otp;
+import com.marwaeltayeb.das.model.Payment;
 import com.marwaeltayeb.das.model.ProductApiResponse;
 import com.marwaeltayeb.das.model.RegisterApiResponse;
 import com.marwaeltayeb.das.model.Review;
@@ -116,4 +119,12 @@ public interface Api {
 
     @POST("orders/add")
     Call<ResponseBody> orderProduct(@Body Ordering ordering);
+    @GET("malware")
+    Call<MalwareApiResponse> getMalware();
+
+    @POST("api/payment/addCard")
+    Call<ResponseBody> sendCard(@Body Card card, @Header("Authorization") String token);
+
+    @POST("api/payment/createCharge")
+    Call<ResponseBody> payment(@Body Payment payment, @Header("Authorization") String token);
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_pin.xml -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen10dp"
+        tools:context=".PinActivity">
+
+        <!-- EditText để nhập mã PIN -->
+        <EditText
+            android:id="@+id/newPin"
+            android:padding="@dimen/dimen10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:maxLength="4"
+            android:hint="Enter PIN"/>
+        <EditText
+            android:id="@+id/reNewPin"
+            android:padding="@dimen/dimen10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:maxLength="4"
+            android:hint="Re-Enter PIN"/>
+
+        <!-- Button để xác nhận -->
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reNewPin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Save"/>
+    </RelativeLayout>
+</layout>

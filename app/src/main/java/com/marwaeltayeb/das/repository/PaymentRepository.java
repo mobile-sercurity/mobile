@@ -5,7 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.marwaeltayeb.das.model.Ordering;
+import com.marwaeltayeb.das.model.Card;
+import com.marwaeltayeb.das.model.Payment;
 import com.marwaeltayeb.das.net.RetrofitClient;
 
 import okhttp3.ResponseBody;
@@ -13,21 +14,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderingRepository {
+public class PaymentRepository {
 
-    private static final String TAG = OrderingRepository.class.getSimpleName();
+    private static final String TAG = PaymentRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> orderProduct(Ordering ordering) {
+    public LiveData<ResponseBody> payment(Payment payment, String token) {
         final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
-
-        RetrofitClient.getInstance().getApi().orderProduct(ordering).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().payment(payment, "Bearer "+token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d(TAG, "onResponse: " + response.body());
 
+                ResponseBody responseBody = response.body();
 
                 if (response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    ResponseBody responseBody = response.body();
                     mutableLiveData.setValue(responseBody);
                 }
             }
@@ -37,7 +37,6 @@ public class OrderingRepository {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
-
         return mutableLiveData;
     }
 

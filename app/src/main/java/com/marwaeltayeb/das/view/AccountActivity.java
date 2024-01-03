@@ -61,6 +61,8 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         binding.rateUs.setOnClickListener(this);
         binding.changePassword.setOnClickListener(this);
         binding.deleteAccount.setOnClickListener(this);
+        binding.pinSetting.setOnClickListener(this);
+        binding.cardSetting.setOnClickListener(this);
     }
 
     @Override
@@ -121,6 +123,14 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.deleteAccount:
                 deleteAccount();
+                break;
+            case R.id.pinSetting:
+                Intent pinIntent = new Intent(this, PinSettingActivity.class);
+                startActivity(pinIntent);
+                break;
+            case R.id.cardSetting:
+                Intent cardIntent = new Intent(this, CardActivity.class);
+                startActivity(cardIntent);
                 break;
             default: // Should not get here
         }
